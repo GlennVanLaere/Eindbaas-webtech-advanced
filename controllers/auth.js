@@ -29,7 +29,23 @@ const showLogin = (req, res) => {
     res.render('auth/login', { title: 'Login' })
 }
 
-const handleLogin = (req, res) => {
+const handleLogin = async (req, res, next) => {
+    let email = req.body.email;
+    let password = req.body.password;
+
+    const user = await User.authenticate()(email, password)
+        .then(result => {
+            res.json({
+                'status': 'success',
+                'data': {
+                    'user' : result
+                }
+            })
+        }).catch(error => {
+            res.json({
+                'status': 'error'
+            })
+        });
 }
 
 module.exports.showSignup = showSignup;
