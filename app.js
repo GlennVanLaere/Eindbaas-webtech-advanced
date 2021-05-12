@@ -11,6 +11,12 @@ var authRouter = require('./routes/auth');
 
 var app = express();
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb+srv://glenn:Siw.981216@cluster0.pthp9.mongodb.net/eindbaasdb', {
+	useNewUrlParser: true, 
+	useUnifiedTopology: true
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
