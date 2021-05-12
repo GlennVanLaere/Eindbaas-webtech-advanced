@@ -12,9 +12,10 @@ var authRouter = require('./routes/auth');
 var app = express();
 
 const mongoose = require('mongoose');
+mongoose.set('useCreateIndex', true);
 mongoose.connect('mongodb+srv://glenn:Siw.981216@cluster0.pthp9.mongodb.net/eindbaasdb', {
-	useNewUrlParser: true, 
-	useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 // view engine setup
@@ -33,12 +34,12 @@ app.use('/auth', authRouter);
 app.use('/api/v1/coins', coinsRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
